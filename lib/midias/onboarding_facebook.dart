@@ -35,19 +35,21 @@ class _OnboardingState extends State<Onboarding> {
         child: Column(
           children: [
 
-            Text(userObj.isNotEmpty ? userObj['name'] : ""),
-            Text(userObj.isNotEmpty ? userObj['email'] : "" ),
+            SizedBox(height: 40,),
+            Text(userObj.isNotEmpty ? userObj['name'] : "aaaa", style: TextStyle(color: Colors.black87)),
+            Text(userObj.isNotEmpty ? userObj['email'] : "aaaa", style: TextStyle(color: Colors.black87)),
 
             Container(
               margin: EdgeInsets.all(Dimens.minMarginApplication),
               child: ElevatedButton(
                   style: Styles().styleDefaultButton,
-                  onPressed: () {
-                    FacebookAuth.instance.login(permissions: ['public_profile' , 'email']).then((value) => (value) {
+                  onPressed: () async {
+                    FacebookAuth.instance.login(permissions: ['public_profile', 'email']).then((value) {
                           FacebookAuth.instance.getUserData().then((userData) async {
 
                             setState(() {
                               userObj = userData;
+                              print("dsasdassda" + userObj.toString());
                             });
                           });
                     });
