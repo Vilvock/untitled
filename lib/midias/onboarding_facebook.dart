@@ -59,6 +59,34 @@ class _OnboardingState extends State<Onboarding> {
                     style: Styles().styleDefaultTextButton,
                   )),
             ),
+
+            SizedBox(height: 40,),
+            Container(
+              margin: EdgeInsets.all(Dimens.minMarginApplication),
+              child: ElevatedButton(
+                  style: Styles().styleDefaultButton,
+                  onPressed: () async {
+
+                  },
+                  child: Text(
+                    "google",
+                    style: Styles().styleDefaultTextButton,
+                  )),
+            ),
+
+            SizedBox(height: 40,),
+            Container(
+              margin: EdgeInsets.all(Dimens.minMarginApplication),
+              child: ElevatedButton(
+                  style: Styles().styleDefaultButton,
+                  onPressed: () async {
+
+                  },
+                  child: Text(
+                    "apple",
+                    style: Styles().styleDefaultTextButton,
+                  )),
+            ),
           ],
         ),
       ),
