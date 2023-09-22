@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../res/dimens.dart';
 import '../res/strings.dart';
@@ -26,6 +27,34 @@ class _OnboardingState extends State<Onboarding> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Future<void> handleAppleSignIn() async {
+    try {
+      final credential = await SignInWithApple.getAppleIDCredential(
+        scopes: [
+          AppleIDAuthorizationScopes.email,
+          AppleIDAuthorizationScopes.fullName,
+        ],
+        webAuthenticationOptions: WebAuthenticationOptions(
+          clientId: 'de.lunaone.flutter.signinwithappleexample.service',
+          redirectUri: Uri.parse(
+            'https://flutter-sign-in-with-apple-example.glitch.me/callbacks/sign_in_with_apple',
+          ),
+        ),
+      );
+
+      final email = credential.email;
+      final firstName = credential.givenName;
+      final lastName = credential.familyName;
+      final authorizationCode = credential.authorizationCode;
+      final nonce = credential.userIdentifier;
+      final state = credential.state;
+
+      print("$email, $firstName, $lastName");
+    } catch (error) {
+      print('Erro ao fazer login com a Apple: $error');
+    }
   }
 
   @override
