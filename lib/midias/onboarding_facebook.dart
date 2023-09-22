@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:sign_in_with_apple/sign_in_with_apple.dart';
 
 import '../res/dimens.dart';
@@ -27,6 +28,23 @@ class _OnboardingState extends State<Onboarding> {
   @override
   void dispose() {
     super.dispose();
+  }
+
+  Future<void> googleAuth(BuildContext context) async {
+    final GoogleSignInAccount? gUser = await GoogleSignIn().signIn();
+
+    final GoogleSignInAuthentication gAuth = await gUser!.authentication;
+
+    // final credential = GoogleAuthProvider.credential(
+    //   accessToken: gAuth.accessToken,
+    //   idToken: gAuth.idToken,
+    // );
+    // gAuth.accessToken
+    print('Email - ${gUser.email}, nome - ${gUser.displayName}');
+
+    // UserCredential fbUserCredential =
+    //     await FirebaseAuth.instance.signInWithCredential(credential);
+
   }
 
   Future<void> handleAppleSignIn() async {
@@ -96,6 +114,7 @@ class _OnboardingState extends State<Onboarding> {
                   style: Styles().styleDefaultButton,
                   onPressed: () async {
 
+                    googleAuth(context);
                   },
                   child: Text(
                     "google",
@@ -110,6 +129,7 @@ class _OnboardingState extends State<Onboarding> {
                   style: Styles().styleDefaultButton,
                   onPressed: () async {
 
+                    handleAppleSignIn();
                   },
                   child: Text(
                     "apple",
